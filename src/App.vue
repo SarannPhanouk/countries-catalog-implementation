@@ -7,7 +7,7 @@
           <input class="search-input" type="text" v-model="searchQuery" placeholder="Search country..." />
         </div>
         <select v-model="sortOrder" class="sort-select">
-          <option value="" disabled>Select Sort Order</option>
+          <option value="null" disabled selected>Sort Order</option>
           <option value="asc">Ascend</option>
           <option value="desc">Descend</option>
         </select>
@@ -22,10 +22,7 @@
           <div class="card-content">
             <img :src="country.flags.png" class="country-flag" @click="openModal(country)"/>
             <div class="country-details">
-              <div class="country-name" @click="openModal(country)">{{ country.name.official }}</div>
-              <div class="country-native">
-                Code: {{ country.cca2 }}
-              </div>
+              <div class="country-name" @click="openModal(country)">{{ country.name.official }}</div>              
             </div>
           </div>
         </div>
@@ -93,7 +90,7 @@ export default {
           keys: ['name.official'],
           includeScore: true,
           findAllMatches: true,
-          threshold: 0.4, // Adjust the threshold as needed
+          threshold: 0.4, 
         };
         const fuse = new Fuse(filtered, options);
         filtered = fuse.search(this.searchQuery).map((result) => result.item);
@@ -251,10 +248,6 @@ export default {
   cursor: pointer;
 }
 
-.country-native {
-  margin-top: 10px;
-}
-
 .pagination-container {
   display: flex;
   justify-content: center;
@@ -332,12 +325,14 @@ export default {
   margin-bottom: 15px;
   text-indent: 0; 
   padding-left: 25px; 
+  padding-right: 25px; 
 }
 
 .modal-info {
   margin-bottom: 5px;
   text-indent: 0; 
   padding-left: 25px; 
+  padding-right: 25px; 
 }
 
 .close-button {
